@@ -34,11 +34,11 @@ class OSCListener:
 		self.udpsocket.setblocking(False)
 		self.udpsocket.settimeout(1)
 		self.delegate = delegate
-  		self.listening = True
-  		if self.listen_thread is None:
-  			self.listen_thread = threading.Thread(target=self.listen)
-  			self.listen_thread.daemon = True
-  			self.listen_thread.start()
+		self.listening = True
+		if self.listen_thread is None:
+                        self.listen_thread = threading.Thread(target=self.listen)
+                        self.listen_thread.daemon = True
+                        self.listen_thread.start()
 
 #########################################
 #
@@ -47,10 +47,10 @@ class OSCListener:
 #   is called.
 #
 #########################################
- 			
-  	def stopListening(self):
-  		self.delegate = None
-  		self.listening = False
+
+	def stopListening(self):
+                self.delegate = None
+                self.listening = False
   		
 #########################################
 #
@@ -61,20 +61,20 @@ class OSCListener:
 #
 #########################################
   		
-  	def listen(self):
+	def listen(self):
 		input = [self.udpsocket]
 
-  		while self.listening:
-  			inputready,outputready,exceptready = select(input,[],[],0)
-  			if ( len(inputready) == 1 ):
-  				self.data,addr = self.udpsocket.recvfrom(256)
-  				self.msglen = len(self.data)
-  				self.packetReceived()
-  			else:
-  				time.sleep(0.1)
+		while self.listening:
+			inputready,outputready,exceptready = select(input,[],[],0)
+			if ( len(inputready) == 1 ):
+				self.data,addr = self.udpsocket.recvfrom(256)
+				self.msglen = len(self.data)
+				self.packetReceived()
+			else:
+				time.sleep(0.1)
   	
 		self.udpsocket.close()
-  		self.listen_thread = None
+		self.listen_thread = None
 
 #########################################
 #
@@ -83,7 +83,7 @@ class OSCListener:
 #
 #########################################
   	
-  	def packetReceived(self):
+	def packetReceived(self):
 		dataindex = 0
 		while ( (dataindex >= 0 ) and ( dataindex < self.msglen ) ):
 			dataindex = self.processMessageAt(dataindex);
@@ -171,14 +171,14 @@ class OSCListener:
 		
 	def nextZero(self, si):
 		i = si
-  		notfound = True
-  		s = ''
-  		while notfound and i<self.msglen:
-  			if self.data[i] == '\x00':
-  				notfound = False
-  			else:
-  				i += 1
-  		return i
+		notfound = True
+		s = ''
+		while notfound and i<self.msglen:
+			if self.data[i] == '\x00':
+				notfound = False
+			else:
+				i += 1
+		return i
 
 #########################################
 #
@@ -187,8 +187,8 @@ class OSCListener:
 #
 #########################################
   		
-  	def nextIndexForString(self, s, start):
-  		ml = math.trunc(len(s) / 4) + 1;
+	def nextIndexForString(self, s, start):
+		ml = math.trunc(len(s) / 4) + 1;
 		return start + (ml*4);
 		
 #########################################
@@ -199,7 +199,7 @@ class OSCListener:
 #########################################
 		
 	def nextIndexForIndex(self, i):
-  		ml = math.trunc(i / 4) + 1;
+		ml = math.trunc(i / 4) + 1;
 		return ml*4;
 
 #########################################
@@ -208,15 +208,15 @@ class OSCListener:
 #
 #########################################
 		
-  	def stringFrom(self, si):
-  		i = si
-  		noterm = True
-  		s = ''
-  		while noterm and i<len(self.data):
-  			if self.data[i] == '\x00':
-  				noterm = False
-  			else:
-  				s += self.data[i]
-  			i += 1
-  		return s
+	def stringFrom(self, si):
+		i = si
+		noterm = True
+		s = ''
+		while noterm and i<len(self.data):
+			if self.data[i] == '\x00':
+				noterm = False
+			else:
+				s += self.data[i]
+			i += 1
+		return s
   			

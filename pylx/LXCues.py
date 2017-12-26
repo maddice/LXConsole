@@ -575,7 +575,7 @@ class LXLiveCue (LXCue):
 				self.output.setDMXValues(buffer)	# dmx 0-255 levels written to self.output
 				self.output.sendDMXNow()
 			except:
-				print "Could not write to DMX output"
+				print ('Could not write to DMX output')
 
 #####		
 #     prepareFade() sets the initialstate and deltastate lists
@@ -686,10 +686,10 @@ class LXLiveCue (LXCue):
 	def startFadeToCue(self, cue, delegate=None):
 		if self.fading:
 			self.delegate = None
-  			self.stopFading()
-  		self.prepareFade(cue, delegate)
-  		self.stopped = False
-  		self.startFading()
+			self.stopFading()
+		self.prepareFade(cue, delegate)
+		self.stopped = False
+		self.startFading()
 
 ##### 	
 #     setMaster(level) converts a percentage 0-100 into the master 0.0-1.0 for
@@ -715,7 +715,7 @@ class LXLiveCue (LXCue):
 			
 #####
 #     patchAddressToChannel calls the patch's patchAddressToChannel method
-#     
+#   
 #####
 			
 	def patchAddressToChannel(self, address, channel, level=100, option=0):

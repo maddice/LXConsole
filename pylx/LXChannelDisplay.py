@@ -6,7 +6,7 @@
 #  see license included with this distribution or
 #  https://www.claudeheintzdesign.com/lx/opensource.html
 
-from Tkinter import *
+from tkinter import *
 
 #########################################
 #
